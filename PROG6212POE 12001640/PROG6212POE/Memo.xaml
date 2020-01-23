@@ -1,0 +1,23 @@
+﻿<Window x:Class="PROG6212POE12001640.Memo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PROG6212POE12001640"
+        mc:Ignorable="d"
+        Title="Memo" Height="500" Width="279" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:PROGPOEDataSet x:Key="pROGPOEDataSet"/>
+        <CollectionViewSource x:Key="mEMOViewSource" Source="{Binding MEMO, Source={StaticResource pROGPOEDataSet}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource mEMOViewSource}">
+        <DataGrid x:Name="mEMODataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,10,10,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="mODCODEColumn" Binding="{Binding MODCODE}" Header="MODCODE" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="tESTNUMColumn" Binding="{Binding TESTNUM}" Header="TESTNUM" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="sELECTEDColumn" Binding="{Binding SELECTED}" Header="SELECTED" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="qNUMColumn" Binding="{Binding QNUM}" Header="QNUM" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

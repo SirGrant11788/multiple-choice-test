@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="progmcq1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="lecturer">
+    <Key>
+      <PropertyRef Name="lectID" />
+    </Key>
+    <Property Name="lectID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lectfname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lectsurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lectemail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="Self.FK_lecturer_users" FromRole="lecturer" ToRole="users" />
+    <NavigationProperty Name="tests" Relationship="Self.FK_test_lecturer" FromRole="lecturer" ToRole="test" />
+  </EntityType>
+  <EntityType Name="question">
+    <Key>
+      <PropertyRef Name="questID" />
+    </Key>
+    <Property Name="questID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="questNum" Type="Int32" />
+    <Property Name="questText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="questChoice1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="questChoice2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="questChoice3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="questCorrectChoice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="testID" Type="Int32" />
+    <NavigationProperty Name="test" Relationship="Self.FK_question_test" FromRole="question" ToRole="test" />
+    <NavigationProperty Name="stests" Relationship="Self.FK_stest_question" FromRole="question" ToRole="stest" />
+  </EntityType>
+  <EntityType Name="stest">
+    <Key>
+      <PropertyRef Name="studID" />
+      <PropertyRef Name="questID" />
+    </Key>
+    <Property Name="studID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="questID" Type="Int32" Nullable="false" />
+    <Property Name="ansChosen" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ansMark" Type="Int32" />
+    <NavigationProperty Name="question" Relationship="Self.FK_stest_question" FromRole="stest" ToRole="question" />
+    <NavigationProperty Name="student" Relationship="Self.FK_stest_student" FromRole="stest" ToRole="student" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="studID" />
+    </Key>
+    <Property Name="studID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="studfname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="studsurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="studemail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="stests" Relationship="Self.FK_stest_student" FromRole="student" ToRole="stest" />
+    <NavigationProperty Name="user" Relationship="Self.FK_student_users" FromRole="student" ToRole="users" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="test">
+    <Key>
+      <PropertyRef Name="testID" />
+    </Key>
+    <Property Name="testID" Type="Int32" Nullable="false" />
+    <Property Name="testName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="testDuration" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="lectID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="lecturer" Relationship="Self.FK_test_lecturer" FromRole="test" ToRole="lecturer" />
+    <NavigationProperty Name="questions" Relationship="Self.FK_question_test" FromRole="test" ToRole="question" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="lecturers" Relationship="Self.FK_lecturer_users" FromRole="users" ToRole="lecturer" />
+    <NavigationProperty Name="students" Relationship="Self.FK_student_users" FromRole="users" ToRole="student" />
+  </EntityType>
+  <Association Name="FK_lecturer_users">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="lecturer" Type="Self.lecturer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="lecturer">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_test_lecturer">
+    <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
+    <End Role="test" Type="Self.test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lecturer">
+        <PropertyRef Name="lectID" />
+      </Principal>
+      <Dependent Role="test">
+        <PropertyRef Name="lectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_question_test">
+    <End Role="test" Type="Self.test" Multiplicity="0..1" />
+    <End Role="question" Type="Self.question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="test">
+        <PropertyRef Name="testID" />
+      </Principal>
+      <Dependent Role="question">
+        <PropertyRef Name="testID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_stest_question">
+    <End Role="question" Type="Self.question" Multiplicity="1" />
+    <End Role="stest" Type="Self.stest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="question">
+        <PropertyRef Name="questID" />
+      </Principal>
+      <Dependent Role="stest">
+        <PropertyRef Name="questID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_stest_student">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="stest" Type="Self.stest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="studID" />
+      </Principal>
+      <Dependent Role="stest">
+        <PropertyRef Name="studID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_users">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="progmcq1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="lecturers" EntityType="Self.lecturer" />
+    <EntitySet Name="questions" EntityType="Self.question" />
+    <EntitySet Name="stests" EntityType="Self.stest" />
+    <EntitySet Name="students" EntityType="Self.student" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tests" EntityType="Self.test" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK_lecturer_users" Association="Self.FK_lecturer_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="lecturer" EntitySet="lecturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_test_lecturer" Association="Self.FK_test_lecturer">
+      <End Role="lecturer" EntitySet="lecturers" />
+      <End Role="test" EntitySet="tests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_question_test" Association="Self.FK_question_test">
+      <End Role="test" EntitySet="tests" />
+      <End Role="question" EntitySet="questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_stest_question" Association="Self.FK_stest_question">
+      <End Role="question" EntitySet="questions" />
+      <End Role="stest" EntitySet="stests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_stest_student" Association="Self.FK_stest_student">
+      <End Role="student" EntitySet="students" />
+      <End Role="stest" EntitySet="stests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_users" Association="Self.FK_student_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="student" EntitySet="students" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(progmcq1Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(progmcq1Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

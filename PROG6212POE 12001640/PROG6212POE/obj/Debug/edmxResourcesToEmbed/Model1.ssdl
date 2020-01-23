@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="progmcq1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="lecturer">
+    <Key>
+      <PropertyRef Name="lectID" />
+    </Key>
+    <Property Name="lectID" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="lectfname" Type="varchar" MaxLength="50" />
+    <Property Name="lectsurname" Type="varchar" MaxLength="50" />
+    <Property Name="lectemail" Type="varchar(max)" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="question">
+    <Key>
+      <PropertyRef Name="questID" />
+    </Key>
+    <Property Name="questID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="questNum" Type="int" />
+    <Property Name="questText" Type="varchar(max)" />
+    <Property Name="questChoice1" Type="varchar(max)" />
+    <Property Name="questChoice2" Type="varchar(max)" />
+    <Property Name="questChoice3" Type="varchar(max)" />
+    <Property Name="questCorrectChoice" Type="varchar" MaxLength="10" />
+    <Property Name="testID" Type="int" />
+  </EntityType>
+  <EntityType Name="stest">
+    <Key>
+      <PropertyRef Name="studID" />
+      <PropertyRef Name="questID" />
+    </Key>
+    <Property Name="studID" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="questID" Type="int" Nullable="false" />
+    <Property Name="ansChosen" Type="varchar" MaxLength="10" />
+    <Property Name="ansMark" Type="int" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="studID" />
+    </Key>
+    <Property Name="studID" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="studfname" Type="varchar" MaxLength="50" />
+    <Property Name="studsurname" Type="varchar" MaxLength="50" />
+    <Property Name="studemail" Type="varchar" MaxLength="50" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="test">
+    <Key>
+      <PropertyRef Name="testID" />
+    </Key>
+    <Property Name="testID" Type="int" Nullable="false" />
+    <Property Name="testName" Type="varchar" MaxLength="50" />
+    <Property Name="testDuration" Type="varchar" MaxLength="20" />
+    <Property Name="lectID" Type="varchar" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_lecturer_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="lecturer" Type="Self.lecturer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="lecturer">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_question_test">
+    <End Role="test" Type="Self.test" Multiplicity="0..1" />
+    <End Role="question" Type="Self.question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="test">
+        <PropertyRef Name="testID" />
+      </Principal>
+      <Dependent Role="question">
+        <PropertyRef Name="testID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_stest_question">
+    <End Role="question" Type="Self.question" Multiplicity="1" />
+    <End Role="stest" Type="Self.stest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="question">
+        <PropertyRef Name="questID" />
+      </Principal>
+      <Dependent Role="stest">
+        <PropertyRef Name="questID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_stest_student">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="stest" Type="Self.stest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="studID" />
+      </Principal>
+      <Dependent Role="stest">
+        <PropertyRef Name="studID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_test_lecturer">
+    <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
+    <End Role="test" Type="Self.test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lecturer">
+        <PropertyRef Name="lectID" />
+      </Principal>
+      <Dependent Role="test">
+        <PropertyRef Name="lectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="progmcq1ModelStoreContainer">
+    <EntitySet Name="lecturer" EntityType="Self.lecturer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="stest" EntityType="Self.stest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_lecturer_users" Association="Self.FK_lecturer_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="lecturer" EntitySet="lecturer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_question_test" Association="Self.FK_question_test">
+      <End Role="test" EntitySet="test" />
+      <End Role="question" EntitySet="question" />
+    </AssociationSet>
+    <AssociationSet Name="FK_stest_question" Association="Self.FK_stest_question">
+      <End Role="question" EntitySet="question" />
+      <End Role="stest" EntitySet="stest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_stest_student" Association="Self.FK_stest_student">
+      <End Role="student" EntitySet="student" />
+      <End Role="stest" EntitySet="stest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_users" Association="Self.FK_student_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_test_lecturer" Association="Self.FK_test_lecturer">
+      <End Role="lecturer" EntitySet="lecturer" />
+      <End Role="test" EntitySet="test" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

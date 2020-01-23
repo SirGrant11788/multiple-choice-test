@@ -1,0 +1,38 @@
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\bin\Debug\PROG6212POE.exe.config
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\bin\Debug\PROG6212POE.exe
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\bin\Debug\PROG6212POE.pdb
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\PROG6212POE.csprojResolveAssemblyReference.cache
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\CreateQuestion.g.cs
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\MainWindow.g.cs
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\Register.g.cs
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\App.g.cs
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\PROG6212POE_MarkupCompile.cache
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\PROG6212POE_MarkupCompile.lref
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\CreateQuestion.baml
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\MainWindow.baml
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\Register.baml
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\PROG6212POE.g.resources
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\PROG6212POE.Properties.Resources.resources
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\PROG6212POE.csproj.GenerateResource.Cache
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\PROG6212POE.exe
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\PROG6212POE.pdb
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\TakeTest.g.cs
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\TakeTest.baml
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\bin\Debug\ClassLibrary1.dll
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\bin\Debug\ClassLibrary1.pdb
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\Memo.g.cs
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\Memo.baml
+C:\Users\18330361\Desktop\PROG6212POE\PROG6212POE\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\PROG6212POE.csprojAssemblyReference.cache
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\CreateQuestion.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\MainWindow.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\Memo.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\Register.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\TakeTest.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\App.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\PROG6212POE_Content.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\PROG6212POE_MarkupCompile.cache
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\PROG6212POE_MarkupCompile.lref
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\PROG6212POE.exe
+F:\Google Drive\VC\PROG6212\Prog6212_12001640\Task 3 prog and doc\PROG6212POE 12001640\PROG6212POE\obj\Debug\PROG6212POE.pdb
